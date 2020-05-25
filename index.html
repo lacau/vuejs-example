@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>VueJS Example</title>
+    <style>
+        .radio {
+            display: inline-block;
+            color: darkgrey;
+            font-weight: bold;
+            padding-right: 5px;
+            padding-left: 5px;
+            cursor: pointer;
+            font-size: 30px;
+        }
+        .selected {
+            color:#000064
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div style="text-align: center;margin-top: 100px">
+            <div style="border: 1px solid black;display: inline-block;border-radius: 5px;border-color: darkgrey;">
+                <div :class="myR" v-on:click="changeState('R')">R</div>
+                <div :class="myS" v-on:click="changeState('S')">S</div>
+            </div>  
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                title: 'teste',
+                controller: {
+                    "R": false,
+                    "S": false,
+                }
+            },
+            computed: {
+                myR () {
+                    return this.controller.R ? 'radio selected' : 'radio'
+                },
+                myS () {
+                    return this.controller.S ? 'radio selected' : 'radio'
+                }
+            },
+            methods: {
+                changeState (v1) {
+                    Object.keys(this.controller).forEach(element => {
+                        this.controller[element] = element === v1 ? !this.controller[element] : false
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+</html>
